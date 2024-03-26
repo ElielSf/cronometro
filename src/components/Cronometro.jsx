@@ -1,34 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import '../css/Cronometro.css'
 
 export default function Cronometro() {
-    const [contador, setContador] = useState(10);
-    const [iniciarContador, setIniciarContador] = useState(false);
+    const [contador, setContador] = useState(0);
+    const [contadorAtivo, setContadorAtivo] = useState(false);
+    const [intervalId, setIntervalId] = useState(null);
 
-    const [valorEscolhido, setValorEscolhido] = useState(''); // Estado para armazenar o valor escolhido pelo usuário
-
-    const handleValorChange = (event) => {
-        setValorEscolhido(event.target.value);
-    };
-
-    const iniciarContador = () => {
-        const valorNumerico = parseInt(valorEscolhido, 10); // Converte o valor para número
-        if (!isNaN(valorNumerico)) {
-            setContador(valorNumerico);
-        }
-
-    useEffect(() => {
-        if (iniciarContador && contador > 0){
+    const iniciarCronometro = () => {
+        if (contadorAtivo) {
+            clearInterval(intervalId);
+            setContadorAtivo(false);
+        } else {
             const idInterval = setInterval(() => {
-                setContador(contador => contador - 1);
+                setContador((contador) => contador + 1);
             }, 1000);
-
-            return () => clearInterval(idInterval);
+            setIntervalId(idInterval);
+            setContadorAtivo(true);
         }
-    }, [iniciarContador, contador])
+    }
 
-    const iniciarContagem = () => {
-        setIniciarContador(true);
+    const limparContador = () => {
+        setContador(0);
     }
 
     return (
@@ -36,9 +28,8 @@ export default function Cronometro() {
             <div content='wrapper__contador'>
                 <h1>Contador: {contador}</h1>
             </div>
-            <input className='wrapper__tempo' onChange={handleValorChange} type="time"/>
-            <button onClick={iniciarContagem} className='wrapper__botao'>Iniciar</button>
-
+            <button onClick={iniciarCronometro}>Iniciar cronometro</button>
+            <button onClick={limparContador}>Limpar cronometro</button>
         </div>
     )
 }

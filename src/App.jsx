@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Cronometro from './components/Cronometro.jsx'
-import CronometroRegressor from './components/CronometroRegressor.jsx'
+import Temporizador from './components/Temporizador.jsx'
 import './css/App.css'
 
 export default function App() {
@@ -8,7 +8,8 @@ export default function App() {
 
   return (
     <div className='content'>
-       <Cronometro />
+      <Cronometro/>
+      <Temporizador/>    
     </div>
   )
 }
