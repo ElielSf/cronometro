@@ -12,7 +12,7 @@ export default function Temporizador() {
             intervalId = setInterval(() => {
                 setTempoRestante(tempoRestante - 1);
             }, 1000);
-        }
+        } 
 
         return () => clearInterval(intervalId);
     }, [ativo, tempoRestante]);
@@ -24,7 +24,11 @@ export default function Temporizador() {
             setTempoRestante(segundos);
             setAtivo(true);
         }
-    }
+    };
+
+    const limparTemporizador = () => {
+        setTempoRestante(0);
+    };
 
     const converterTempoParaSegundos = (tempo) => {
         const [horas, minutos, segundos] = tempo.split(':');
@@ -32,13 +36,14 @@ export default function Temporizador() {
     };
 
     return (
-        <div content='contentTemporizador'>
-            <div content='wrapper__temporizador'>
-                <h1>Tempo restante: {tempoRestante}</h1>
+        <div className='Temporizador'>
+            <div className='Temporizador__card'>
+                <h1 className='Temporizador__title'>{(tempoRestante > 0) ? (`Tempo restante: ${tempoRestante}s`) : ''}</h1>
+                <label className='Temporizador__label' for='temporizador'>Escolha o tempo para o temporizador: </label>
+                <input className='Temporizador__input' type='time' step='2' name='temporizador' required/>
+                <button className='Temporizador__button--activated' onClick={iniciarTemporizador} >Iniciar Temporizador</button>
+                <button className='Temporizador__button--clear' onClick={limparTemporizador} >Limpar Temporizador</button>
             </div>
-            <label for='temporizador'>Escolha o tempo para o temporizador: </label>
-            <input type='time' step='2' name='temporizador' min='00:00:01' required/>
-            <button onClick={iniciarTemporizador} >Iniciar Temporizador</button>
         </div>
     )
 }

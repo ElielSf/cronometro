@@ -7,9 +7,9 @@ export default function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='content'>
-      <Cronometro/>
-      <Temporizador/>    
+    <div className='App'>
+      <main className='Cronometro__area'><Cronometro/></main>
+      <aside className='Temporizador__area'><Temporizador/></aside>
     </div>
   )
 }

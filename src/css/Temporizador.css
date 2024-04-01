@@ -1,4 +1,69 @@
-.contentTemporizador {
+.Temporizador {
     width: 50vw;
-    height: 100%;
+    height: 100vh;
+}
+
+.Temporizador__card {
+    width: 70%;
+    height: 40%;
+
+    border-radius: 10px;
+    background-color: rgb(167, 166, 166);
+    box-shadow: 4px 4px 1px rgb(112, 112, 112);
+}
+
+.Temporizador, .Temporizador__card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Temporizador__title {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.Temporizador__label {
+    font-size: 1.2em;
+    padding-top: 25px;
+}
+
+.Temporizador__input {
+    width: 40%;
+    height: 10%;
+    padding-left: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    border: none;
+    border-radius: 10px;
+}
+
+.Temporizador__button--activated {
+    width: 50%;
+    height: 15%;
+}
+
+.Temporizador__button--activated, .Temporizador__button--clear {
+    width: 60%;
+    height: 16%;
+
+    margin-top: 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.Temporizador__button--activated {
+    background-color: rgb(255, 0, 0);
+    box-shadow: 2px 2px rgb(124, 0, 0);
+}
+
+.Temporizador__button--clear {
+    background-color: cyan;
+    box-shadow: 2px 2px rgb(0, 119, 119);
 }

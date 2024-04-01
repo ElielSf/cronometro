@@ -1,35 +1,47 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../css/Cronometro.css'
 
 export default function Cronometro() {
     const [contador, setContador] = useState(0);
     const [contadorAtivo, setContadorAtivo] = useState(false);
-    const [intervalId, setIntervalId] = useState(null);
+    const [limparContador, setLimparContador] = useState(false);
 
-    const iniciarCronometro = () => {
-        if (contadorAtivo) {
-            clearInterval(intervalId);
+    useEffect(() => {
+        let timer;
+
+        if (limparContador) {
+            setContador(0);
+            setLimparContador(false);
             setContadorAtivo(false);
-        } else {
-            const idInterval = setInterval(() => {
+            return;
+        }
+
+        if (contadorAtivo) {
+            timer = setInterval(() => {
                 setContador((contador) => contador + 1);
             }, 1000);
-            setIntervalId(idInterval);
-            setContadorAtivo(true);
-        }
-    }
 
-    const limparContador = () => {
-        setContador(0);
-    }
+            return () => clearTimeout(timer);
+        } else {
+            return;
+        }        
+    }, [contadorAtivo, limparContador]);
 
+    const iniciarCronometro = () => {
+        setContadorAtivo(!contadorAtivo);
+    };  
+
+    const limparCronometro = () => {
+        setLimparContador(true);
+    };
+    
     return (
-        <div content='contentCronometro'>
-            <div content='wrapper__contador'>
-                <h1>Contador: {contador}</h1>
-            </div>
-            <button onClick={iniciarCronometro}>Iniciar cronometro</button>
-            <button onClick={limparContador}>Limpar cronometro</button>
+        <div className='Cronometro'>
+            <div className='Cronometro__card'>
+                <h1 className='Cronometro__title'>Contador: {contador}</h1>
+                <button className={contadorAtivo ? 'Cronometro__button--activated' : 'Cronometro__button--desactivated'} onClick={iniciarCronometro}>{contadorAtivo ? 'Pausar Cronometro' : 'Iniciar cronometro'}</button>
+                <button className='Cronometro__button--clear' onClick={limparCronometro}>Limpar cronometro</button>
+            </div>  
         </div>
     )
 }

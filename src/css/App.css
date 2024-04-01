@@ -1,0 +1,13 @@
+.App {
+    display: grid;
+    grid-template-areas: 
+    'cronometro temporizador';
+}
+
+.Cronometro__area {
+    grid-area: cronometro;
+}
+
+.Temporizador__area {
+    grid-area: temporizador;
+}
